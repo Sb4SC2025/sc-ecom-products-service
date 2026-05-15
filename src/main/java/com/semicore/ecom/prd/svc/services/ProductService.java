@@ -30,7 +30,7 @@ public class ProductService {
 
     public String addProduct(Product product) {
         productsDb.getProducts().add(product);
-        return "Product added successfully";
+        return "Product added successfully to the database";
     }
 
     public String modifyProduct(Product product) {
@@ -41,7 +41,7 @@ public class ProductService {
                 return "Product modified successfully";
             }
         }
-        return "Product not found";
+        return "Product not found to modify";
     }
 
     public String deleteProduct(String id) {
@@ -52,6 +52,6 @@ public class ProductService {
                 return "Product deleted successfully";
             }
         }
-        return "Product not found";
+        return "Product not found to delete";
     }
 }

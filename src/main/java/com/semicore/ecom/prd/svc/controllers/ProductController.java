@@ -1,13 +1,19 @@
 package com.semicore.ecom.prd.svc.controllers;
 
 import com.semicore.ecom.prd.svc.modals.Product;
-import com.semicore.ecom.prd.svc.modals.ProductsDb;
 import com.semicore.ecom.prd.svc.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+/*
+* @RestController is a specialized version of the @Controller annotation in Spring MVC.
+*  It is used to create RESTful web services and indicates that the class will handle
+* HTTP requests and return responses in a RESTful manner, typically in JSON or XML format.
+*  When a class is annotated with @RestController, it combines the behavior of
+* @Controller and @ResponseBody, meaning that the return values of methods will be automatically
+* serialized into the response body.
+* */
 @RestController
 @RequestMapping(path = "/products") // Base path for all endpoints in this controller
 public class ProductController {
@@ -37,7 +43,7 @@ public class ProductController {
 
     //@RequestMapping(path = "/products/{productid}", method = RequestMethod.GET, produces = "application/json")
     // @RequestMapping(path = "/{productid}", method = RequestMethod.GET, produces = "application/json")
-    @GetMapping("/{productid}")
+    @GetMapping("/productid/{productid}")
     public Product findProductById(@PathVariable(name = "productid") String id) {
         // Implementation to get a product by ID
    /*     for(Product product : products) {
@@ -47,8 +53,23 @@ public class ProductController {
         }
         return new Product("", "", "No product available", 0.0); // or throw an exception if not found
    */
-
+        System.out.println("Finding product with ID: " + id);
         return productService.findProductById(id);
+    }
+
+    @GetMapping("/productname/{productname}")
+    public Product findProductByName(@PathVariable(name = "productname") String name) {
+        // Implementation to get a product by name
+        System.out.println("Finding product with Name: " + name);
+        Product product = productService.findProductByName(name);
+        return product;
+    }
+
+    @GetMapping("/productid/{productid}/productname/{productname}")
+    public Product findProductByIdAndName(@PathVariable(name = "productid") String id, @PathVariable(name = "productname") String name) {
+        // Implementation to get a product by ID and name
+        System.out.println("Finding product with ID: " + id + " and Name: " + name);
+        return productService.findProductByIdAndName(id, name);
     }
 
     //@RequestMapping(path = "/products/add", method = RequestMethod.POST, consumes = "application/json")

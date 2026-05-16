@@ -54,4 +54,24 @@ public class ProductService {
         }
         return "Product not found";
     }
+
+    public Product findProductByName(String name) {
+        // Implementation to get a product by name
+        for(Product product : productsDb.getProducts()) {
+            if(product.getName().equalsIgnoreCase(name)) {
+                return product;
+            }
+        }
+        return new Product("", "", "No product available", 0.0); // or throw an exception if not found
+    }
+
+    public Product findProductByIdAndName(String id, String name) {
+        // Implementation to get a product by ID and name
+        for(Product product : productsDb.getProducts()) {
+            if(product.getId().equals(id) && product.getName().equalsIgnoreCase(name)) {
+                return product;
+            }
+        }
+        return new Product("", "", "No product available", 0.0); // or throw an exception if not found
+    }
 }
